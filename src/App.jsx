@@ -15,6 +15,12 @@ const App = () => {
         e.preventDefault()
     }
 
+
+    const removeData = (index)=>{
+        list.splice(index);
+        setlist([...list])
+    }
+
     return (
         <>
             <table>
@@ -25,18 +31,15 @@ const App = () => {
                                 return (
                                     <tr>
                                         <td>{element}</td>
-                                        <button>Remove</button>
+                                        <button onClick={()=>{removeData(index)}}>Remove</button>
                                     </tr>
                                 )
                             })
                         ) : (
                             <tr></tr>
                         )
-                            
-                        
                     }
                 </tbody>
-                
             </table>
             <form onSubmit={noRefresh}>
                 <label>Name</label>
