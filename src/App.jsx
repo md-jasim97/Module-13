@@ -3,51 +3,43 @@ import { useState } from 'react';
 
 const App = () => {
 
-    const [item, setItem] = useState();
-    const [list, setlist] = useState([])
+    const [myData, setmyData] = useState({name : "", roll : "", city : "", gender : "" })
 
-    const itemAdd = ()=>{
-        list.push(item);
-        setlist([...list])
+    const myinputData = (property, value)=>{
+        setmyData(prvObj=>({
+            ...prvObj,
+            [property] : value
+        })) 
+    }
+    const refreshOff = (event)=>{
+        event.preventDefault();
+        console.log(myData)
     }
 
-    const noRefresh = (e) =>{
-        e.preventDefault()
-    }
-
-
-    const removeData = (index)=>{
-        list.splice(index);
-        setlist([...list])
-    }
 
     return (
-        <>
-            <table>
-                <tbody>
-                    {
-                        list.length!==0 ?(
-                            list.map((element, index)=>{
-                                return (
-                                    <tr>
-                                        <td>{element}</td>
-                                        <button onClick={()=>{removeData(index)}}>Remove</button>
-                                    </tr>
-                                )
-                            })
-                        ) : (
-                            <tr></tr>
-                        )
-                    }
-                </tbody>
-            </table>
-            <form onSubmit={noRefresh}>
-                <label>Name</label>
-                <input onChange={(e)=>setItem(e.target.value)} type='text' placeholder='Type your name'/>
-                <button onClick={itemAdd} >Submit</button>
-            </form>
-            
-        </>
+        <div className='container'>
+
+        <form onSubmit={refreshOff}>
+            <label> Name :</label>
+            <input onChange={(e)=>{myinputData("name", e.target.value)}} value={myData.name} type="text" placeholder='Type your name' />
+            <label> Roll :</label>
+            <input onChange={(e)=>{myinputData("roll", e.target.value)}} value={myData.roll} type="number" placeholder='Type your roll' />
+            <select onChange={(e)=>{myinputData("city", e.target.value)}} value={myData.city} name="" id="">city : 
+                <option value="">Choose City</option>
+                <option value="Dhaka">Dhaka</option>
+                <option value="Rajshahi">Rajshahi</option>
+                <option value="Rangpur">Rangpur</option>
+            </select>
+            <label>Gender :</label>
+            <input onChange={()=>{myinputData("gender","male")}} checked={myData.gender==="male"} type="radio" name="gender" /> Male
+            <input onChange={()=>{myinputData("gender","female")}}checked={myData.gender==="female"}type="radio" name="gender" /> Female
+            <br />
+
+            <button>Submit</button>
+        </form>
+
+        </div>
     );
 };
 
