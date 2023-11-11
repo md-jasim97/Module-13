@@ -4,8 +4,10 @@ import { useState } from 'react';
 const App = () => {
 
     useEffect(()=>{
-        console.log("Hello")
-    },[15  ])
+        fetch('https://dummyjson.com/products/1')
+        .then(res=>res.json())
+        .then(json=>setmyData(json))
+    },[])
 
     const [myData, setmyData] = useState({name : "", roll : "", city : "", gender : "" })
 
@@ -42,6 +44,10 @@ const App = () => {
 
             <button>Submit</button>
         </form>
+
+        <div>
+            {JSON.stringify(myData)}
+        </div>
 
 
     
