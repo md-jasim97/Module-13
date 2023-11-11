@@ -4,9 +4,11 @@ import { useState } from 'react';
 const App = () => {
 
     useEffect(()=>{
-        fetch('https://dummyjson.com/products/1')
-        .then(res=>res.json())
-        .then(json=>setmyData(json))
+        (async()=>{
+           let response =await fetch('https://dummyjson.com/products/1')
+           let json = await response.json()
+           setmyData(json)
+        })()
     },[])
 
     const [myData, setmyData] = useState({name : "", roll : "", city : "", gender : "" })
