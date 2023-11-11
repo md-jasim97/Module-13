@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 
 const App = () => {
+
+    useEffect(()=>{
+        console.log("Hello")
+    },[15  ])
 
     const [myData, setmyData] = useState({name : "", roll : "", city : "", gender : "" })
 
@@ -38,6 +42,9 @@ const App = () => {
 
             <button>Submit</button>
         </form>
+
+
+    
 
         </div>
     );
