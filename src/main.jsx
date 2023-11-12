@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import 'milligram/dist/milligram.css'
+import '../src/assets/style.css'
 
 
 
