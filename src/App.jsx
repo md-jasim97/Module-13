@@ -1,59 +1,25 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import HomePage from './Pages/HomePage';
+import AboutPage from './Pages/AboutPage';
+import LoginPage from './Pages/LoginPage';
+import ProductPage from './Pages/ProductPage';
 
 const App = () => {
 
-    useEffect(()=>{
-        (async()=>{
-           let response =await fetch('https://dummyjson.com/products/1')
-           let json = await response.json()
-           setmyData(json)
-        })()
-    },[])
 
-    const [myData, setmyData] = useState({name : "", roll : "", city : "", gender : "" })
-
-    const myinputData = (property, value)=>{
-        setmyData(prvObj=>({
-            ...prvObj,
-            [property] : value
-        })) 
-    }
-    const refreshOff = (event)=>{
-        event.preventDefault();
-        console.log(myData)
-    }
 
 
     return (
-        <div className='container'>
-
-        <form onSubmit={refreshOff}>
-            <label> Name :</label>
-            <input onChange={(e)=>{myinputData("name", e.target.value)}} value={myData.name} type="text" placeholder='Type your name' />
-            <label> Roll :</label>
-            <input onChange={(e)=>{myinputData("roll", e.target.value)}} value={myData.roll} type="number" placeholder='Type your roll' />
-            <select onChange={(e)=>{myinputData("city", e.target.value)}} value={myData.city} name="" id="">city : 
-                <option value="">Choose City</option>
-                <option value="Dhaka">Dhaka</option>
-                <option value="Rajshahi">Rajshahi</option>
-                <option value="Rangpur">Rangpur</option>
-            </select>
-            <label>Gender :</label>
-            <input onChange={()=>{myinputData("gender","male")}} checked={myData.gender==="male"} type="radio" name="gender" /> Male
-            <input onChange={()=>{myinputData("gender","female")}}checked={myData.gender==="female"}type="radio" name="gender" /> Female
-            <br />
-
-            <button>Submit</button>
-        </form>
-
         <div>
-            {JSON.stringify(myData)}
-        </div>
-
-
-    
-
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' element={<HomePage/>}/>
+                    <Route path='about' element={<AboutPage/>}/>
+                    <Route path='login' element={<LoginPage/>}/>
+                    <Route path='product' element={<ProductPage/>}/>
+                </Routes>
+            </BrowserRouter>
         </div>
     );
 };
